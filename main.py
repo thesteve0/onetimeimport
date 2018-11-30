@@ -13,14 +13,13 @@ with open(file, 'r') as infile:
     for catid in infile:
         catids.append(catid.strip())
 
-json_catids = json.dumps(catids)
-
 gbdx = Interface()
 
 url = "https://rda.geobigdata.io/v1/authorization/addCatalogIdsToOpenDataWhitelist"
-payload = json_catids
+payload = catids
 
 r = gbdx.gbdx_connection.post(url, json=payload)
+print(r.json)
 print(r.status_code)
 print('content: ' + str(r.content))
 
